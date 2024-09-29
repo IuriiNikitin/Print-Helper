@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Helper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        label {
+            margin-bottom: 5px;
+        }
+        input[type="number"], select {
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <label for="start">Начальное число:</label>
+        <input type="number" id="start" name="start">
+
+        <label for="end">Конечное число:</label>
+        <input type="number" id="end" name="end">
+
+        <label for="type">Тип чисел:</label>
+        <select id="type" name="type">
+            <option value="even">Чётные</option>
+            <option value="odd">Нечётные</option>
+        </select>
+
+        <button onclick="filterNumbers()">Показать числа</button>
+				<div>Сначала Нечётные потом Чётные Инвертированно</div>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function filterNumbers() {
+            const start = parseInt(document.getElementById('start').value);
+            const end = parseInt(document.getElementById('end').value);
+            const type = document.getElementById('type').value;
+            const result = document.getElementById('result');
+            let numbers = [];
+
+            if (isNaN(start) || isNaN(end)) {
+                result.innerHTML = 'Пожалуйста, введите корректные числа.';
+                return;
+            }
+
+            for (let i = start; i <= end; i++) {
+                if (type === 'even' && i % 2 === 0) {
+                    numbers.push(i);
+                } else if (type === 'odd' && i % 2 !== 0) {
+                    numbers.push(i);
+                }
+            }
+
+            result.innerHTML = numbers.join(', ');
+        }
+    </script>
+</body>
+</html>
